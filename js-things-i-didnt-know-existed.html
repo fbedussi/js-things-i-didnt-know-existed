@@ -1,0 +1,354 @@
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js – The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<link rel="stylesheet" href="css/custom.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section >
+<h1>JS things I never knew existed</h1>
+<p>shameless copyed from</p>
+<p><a href="%5Bhttps://air.ghost.io/js-things-i-never-knew-existed/%5D">air.ghost.io/js-things-i-never-knew-existed</a></p>
+</section>
+<section >
+<section >
+<h1>Label Statements</h1>
+<p>You can name for loops</p>
+<pre><code>loop1: // labeling &quot;loop1&quot; 
+for (let i = 0; i &lt; 3; i++) { // &quot;loop1&quot;
+   loop2: // labeling &quot;loop2&quot;
+   for (let j = 0; j &lt; 3; j++) { // &quot;loop2&quot;
+      if (i === 1) {
+         continue loop1; // continues upper &quot;loop1&quot;
+         // break loop1; // breaks out of upper &quot;loop1&quot;
+      }
+      console.log(`i = ${i}, j = ${j}`);
+   }
+}
+
+/* 
+ * # Output
+ * i = 0, j = 0
+ * i = 0, j = 1
+ * i = 0, j = 2
+ * i = 2, j = 0
+ * i = 2, j = 1
+ * i = 2, j = 2
+ */
+</code></pre>
+</section>
+<section >
+<p>and blocks</p>
+<pre><code>foo: {
+  console.log('one');
+  break foo;
+  console.log('this log will not be executed');
+}
+console.log('two');
+
+/*
+ * # Output
+ * one
+ * two
+ */
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>all browsers</p>
+</section>
+</section>
+<section >
+<section >
+<h1>&quot;void&quot; Operator</h1>
+<p>The void operator evaluates the given expression and then returns undefined</p>
+<pre><code>void function iife() {
+	console.log('hello');
+}();
+
+// is the same as...
+
+(function iife() {
+    console.log('hello');
+})()
+
+</code></pre>
+</section>
+<section >
+<p>One cavaet with void is the evaluation of the expression is... void (undefined)!</p>
+<pre><code>const word = void function iife() {
+	return 'hello';
+}();
+
+// word is &quot;undefined&quot;
+
+const word = (function iife() {
+	return 'hello';
+})();
+
+// word is &quot;hello&quot;
+Copy
+
+</code></pre>
+</section>
+<section >
+<p>You can also use void with async, you could then use it as an asynchronous entry point to your code:</p>
+<pre><code>void async function() { 
+    try {
+        const response = await fetch('air.ghost.io'); 
+        const text = await response.text();
+        console.log(text);
+    } catch(e) {
+        console.error(e);
+    }
+}()
+
+// or just stick to this :)
+
+(async () =&gt; {
+    try {
+        const response = await fetch('air.ghost.io'); 
+        const text = await response.text();
+        console.log(text);
+    } catch(e) {
+        console.error(e);
+    }
+})();
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>all browsers</p>
+</section>
+</section>
+<section >
+<section >
+<h1>Comma Operator</h1>
+<p>The comma operator evaluates each of its operands (from left to right) and returns the value of the last operand</p>
+<pre><code>function myFunc() {
+  let x = 0;
+  return (x += 1, x); // same as return ++x;
+}
+
+y = false, true; // returns true in console
+console.log(y); // false (left-most)
+
+z = (false, true); // returns true in console
+console.log(z); // true (right-most)
+</code></pre>
+</section>
+<section >
+<h2>With Conditional Operator</h2>
+<pre><code>const type = 'man';
+
+const isMale = type === 'man' ? (
+    console.log('Hi Man!'),
+    true
+) : (
+    console.log('Hi Lady!'),
+    false
+);
+
+console.log(`isMale is &quot;${isMale}&quot;`);
+
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>all browsers</p>
+</section>
+</section>
+<section >
+<section >
+<h1>I11n API</h1>
+<pre><code>const date = new Date();
+
+const options = {
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric'
+};
+
+const formatter1 = new Intl.DateTimeFormat('es-es', options);
+console.log(formatter1.format(date)); // 22 de diciembre de 2017
+
+const formatter2 = new Intl.DateTimeFormat('en-us', options);
+console.log(formatter2.format(date)); // December 22, 2017
+</code></pre>
+</section>
+<section >
+<h2>Plural rules</h2>
+<pre><code>var pr = new Intl.PluralRules();
+pr.select(0);
+// → 'other' if in US English locale
+pr.select(1); 
+// → 'one' if in US English locale
+pr.select(2);
+// → 'other' if in US English locale
+</code></pre>
+<pre><code>// Arabic has different plural rules
+new Intl.PluralRules('ar-EG').select(0);
+// → 'zero'
+new Intl.PluralRules('ar-EG').select(1); 
+// → 'one'
+new Intl.PluralRules('ar-EG').select(2);
+// → 'two'
+new Intl.PluralRules('ar-EG').select(6);
+// → 'few'
+new Intl.PluralRules('ar-EG').select(18);
+// → 'many'
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>all browsers, except Opera Mini</p>
+</section>
+</section>
+<section >
+<section >
+<h1>Pipeline operator</h1>
+<pre><code>const square = (n) =&gt; n * n;
+const increment = (n) =&gt; n + 1;
+
+// without pipeline operator
+square(increment(square(2))); // 25
+
+// with pipeline operator
+2 |&gt; square |&gt; increment |&gt; square; // 25
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>only Firefox 58+ behind a flag</p>
+</section>
+</section>
+<section >
+<section >
+<h1>[].reduceRight</h1>
+<pre><code>const flattened = [[0, 1], [2, 3], [4, 5]]
+    .reduceRight(function(a, b) {
+        return a.concat(b);
+    }, []);
+
+// flattened array is [4, 5, 2, 3, 0, 1]
+</code></pre>
+</section>
+<section >
+<h2>Browse support</h2>
+<p>all browsers, IE9+</p>
+</section>
+</section>
+<section >
+<section >
+<h1>setTimeout() Parameters</h1>
+<pre><code>setTimeout(alert, 1000, 'Hello world!');
+
+/*
+ * # Output (alert)
+ * Hello World!
+ */
+
+function log(text, textTwo) {
+    console.log(text, textTwo);
+}
+
+setTimeout(log, 1000, 'Hello World!', 'And Mars!');
+
+/*
+ * # Output
+ * Hello World! And Mars!
+ */
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>all browsers</p>
+</section>
+</section>
+<section >
+<section >
+<h1>dataset</h1>
+<pre><code>&lt;div id='person' data-name='john' data-birth-planet='earth'&gt;&lt;/div&gt;
+</code></pre>
+<pre><code>let personEl = document.querySelector('#person');
+
+console.log(personEl.dataset) 
+// DOMStringMap {name: &quot;john&quot;, birthPlanet: &quot;earth&quot;}
+console.log(personEl.dataset.name) // john
+console.log(personEl.dataset.birthPlanet) // earth
+
+// you can programmatically add more too
+personEl.dataset.foo = 'bar';
+console.log(personEl.dataset.foo); // bar
+
+// with destructuring
+const {name, birthDate} = person.dataset
+</code></pre>
+</section>
+<section >
+<h2>Browser support</h2>
+<p>all browsers, IE11+</p>
+</section>
+</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			{
+				let configuration = {"controls":true,"progress":true,"slideNumber":false,"history":false,"keyboard":true,"overview":true,"center":true,"touch":true,"loop":false,"rtl":false,"shuffle":false,"fragments":true,"embedded":false,"help":true,"showNotes":false,"autoSlideStoppable":true,"mouseWheel":false,"hideAddressBar":true,"previewLinks":false,"transition":"none","transitionSpeed":"default","backgroundTransition":"default","autoSlide":0,"viewDistance":3,"parallaxBackgroundImage":"","parallaxBackgroundSize":"","parallaxBackgroundHorizontal":null,"parallaxBackgroundVertical":null};
+				configuration.dependencies = [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				];
+				Reveal.initialize(configuration);
+			}
+		</script>
+
+	</body>
+</html>
