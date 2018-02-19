@@ -123,7 +123,6 @@ const word = (function iife() {
 })();
 
 // word is &quot;hello&quot;
-Copy
 
 </code></pre>
 </section>
@@ -222,17 +221,31 @@ pr.select(1);
 pr.select(2);
 // → 'other' if in US English locale
 </code></pre>
-<pre><code>// Arabic has different plural rules
-new Intl.PluralRules('ar-EG').select(0);
-// → 'zero'
-new Intl.PluralRules('ar-EG').select(1); 
+<pre><code>// Russian has different plural rules
+new Intl.PluralRules('ru-RU').select(1);
 // → 'one'
-new Intl.PluralRules('ar-EG').select(2);
-// → 'two'
-new Intl.PluralRules('ar-EG').select(6);
+new Intl.PluralRules('ru-RU').select(2); 
 // → 'few'
-new Intl.PluralRules('ar-EG').select(18);
+new Intl.PluralRules('ru-RU').select(3);
+// → 'few'
+new Intl.PluralRules('ru-RU').select(4);
+// → 'few'
+new Intl.PluralRules('ru-RU').select(5);
 // → 'many'
+</code></pre>
+</section>
+<section >
+<h2>numbers</h2>
+<pre><code>var number = 123456.789;
+
+console.log(new Intl.NumberFormat('de-DE', 
+    { style: 'currency', currency: 'EUR' }).format(number));
+// expected output: &quot;123.456,79 €&quot;
+
+// the Japanese yen doesn't use a minor unit
+console.log(new Intl.NumberFormat('ja-JP', 
+    { style: 'currency', currency: 'JPY' }).format(number));
+// expected output: &quot;￥123,457&quot;
 </code></pre>
 </section>
 <section >

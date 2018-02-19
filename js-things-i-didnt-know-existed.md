@@ -91,7 +91,6 @@ const word = (function iife() {
 })();
 
 // word is "hello"
-Copy
 
 ````
 :::
@@ -208,17 +207,33 @@ pr.select(2);
 ````
 
 ````
-// Arabic has different plural rules
-new Intl.PluralRules('ar-EG').select(0);
-// → 'zero'
-new Intl.PluralRules('ar-EG').select(1); 
+// Russian has different plural rules
+new Intl.PluralRules('ru-RU').select(1);
 // → 'one'
-new Intl.PluralRules('ar-EG').select(2);
-// → 'two'
-new Intl.PluralRules('ar-EG').select(6);
+new Intl.PluralRules('ru-RU').select(2); 
 // → 'few'
-new Intl.PluralRules('ar-EG').select(18);
+new Intl.PluralRules('ru-RU').select(3);
+// → 'few'
+new Intl.PluralRules('ru-RU').select(4);
+// → 'few'
+new Intl.PluralRules('ru-RU').select(5);
 // → 'many'
+````
+:::
+
+:::slide
+## numbers
+````
+var number = 123456.789;
+
+console.log(new Intl.NumberFormat('de-DE', 
+    { style: 'currency', currency: 'EUR' }).format(number));
+// expected output: "123.456,79 €"
+
+// the Japanese yen doesn't use a minor unit
+console.log(new Intl.NumberFormat('ja-JP', 
+    { style: 'currency', currency: 'JPY' }).format(number));
+// expected output: "￥123,457"
 ````
 :::
 
