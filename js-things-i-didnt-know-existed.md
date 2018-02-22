@@ -1,6 +1,6 @@
 ::::slide
 # JS things I never knew existed
-shameless copyed from 
+shameless copied from 
 
 [air.ghost.io/js-things-i-never-knew-existed]([https://air.ghost.io/js-things-i-never-knew-existed/])
 ::::
@@ -176,7 +176,7 @@ all browsers
 
 ::::slide
 :::slide
-# I11n API
+# I18n API
 ````
 const date = new Date();
 
